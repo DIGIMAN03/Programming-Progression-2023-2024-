@@ -1,0 +1,83 @@
+// Michael Helfand
+// Project 5: array sort with low level cs
+// December 3rd 2023
+Program SLCsort;
+#include( "stdlib.hhf" );
+		const num := 11;
+static
+						// Array elements
+		A2: uns32 [num] := [14, 64, 29, 10, 98, 57, 39, 34, 90, 81, 26];
+		I2: int32;
+		I: int32;
+		Tmp: int32;
+
+begin SLCsort;
+		mov(num-1,I2);
+		stdout.put (nl, "Michael Helfand - Project 5", nl, nl);
+		stdout.put ("Selection Sort, Number of Array Elements: ", num, nl); 
+		stdout.put ("Original Array Elements:", nl);
+		MOV(0, EBX);
+Whilep1:	CMP(EBX, num);
+		JNL EndofWhilep1;
+
+						// Print array
+		stdout.puti32Size (A2 [EBX * 4], 4, ' ');
+		INC (EBX);
+		JMP Whilep1;
+EndofWhilep1:
+						
+		stdout.put (" ", nl);
+		stdout.put (" ", nl);
+		stdout.put ("Sorting... ", nl);
+WhileL:	 	CMP(I2, 0);
+		JNGE EndofWhileL;
+		mov(0,I);
+						//finding the maximum
+		MOV (0, EBX);	
+Whilefw:		CMP(EBX, I2);
+			JNLE EndofWhilefw;
+		
+						
+		mov(I,EAX);
+		mov(A2[EAX*4], ECX);
+
+		CMP(ECX, A2[EBX*4]);
+		JL MakeMax;
+		JMP EndMakeMax;
+MakeMax:
+		mov(EBX, I);
+EndMakeMax:
+		INC (EBX);
+		JMP Whilefw;
+
+EndofWhilefw:
+		mov(I,EAX);			//sorting the numbers
+		CMP(EAX, I2);
+		JL DubCheck;
+		JMP EndDubCheck;
+DubCheck:
+		mov(I2,ECX);
+		mov(A2[ECX*4],Tmp);
+		mov(A2[EAX*4],A2[ECX*4]);
+		mov(Tmp, A2[EAX*4]);
+						//to check if already sorted
+		
+EndDubCheck:
+		sub(1,I2);
+
+		MOV (0, EBX);
+Whilep2:	CMP(EBX, num);
+		JNL EndofWhilep2;
+						// Print array
+		stdout.puti32Size (A2 [EBX * 4], 4, ' ');
+		INC (EBX);
+		JMP Whilep2;
+EndofWhilep2:
+		stdout.put (" ", nl);
+		JMP WhileL;
+EndofWhileL:
+
+
+		stdout.put (nl, "Michael Helfand - Project 5", nl, nl);
+
+end SLCsort;

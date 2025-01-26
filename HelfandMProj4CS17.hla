@@ -1,0 +1,55 @@
+// Michael Helfand
+// Project 4: array sort
+// November 19th 2023
+Program SLCsort;
+#include ("stdlib.hhf");
+	const num := 11;
+static
+// Array elements
+	A2: uns32 [num] := [14, 64, 29, 10, 98, 57, 39, 34, 90, 81, 26];
+	I2: int32;
+	I: int32;
+	Tmp: int32;
+begin SLCsort;
+	mov(num-1,I2);
+	stdout.put (nl, "Michael Helfand - Project 4", nl, nl);
+	stdout.put ("Selection Sort, Number of Array Elements: ", num, nl); 
+	stdout.put ("Original Array Elements:", nl);
+for (MOV (0, EBX); EBX < num; INC (EBX)) do
+// Print array
+	stdout.puti32Size (A2 [EBX * 4], 4, ' ');
+endfor;
+stdout.put (" ", nl);
+stdout.put (" ", nl);
+stdout.put ("Sorting... ", nl);
+While(I2 >= 0) do
+mov(0,I);
+//finding the maximum
+	for (MOV (0, EBX); EBX <= I2; INC (EBX)) do
+			mov(I,EAX);
+			mov(A2[EAX*4], ECX);
+
+		if(ECX < A2[EBX*4]) then
+			mov(EBX, I);
+		endif;
+	endfor;
+mov(I,EAX);
+//sorting the numbers
+if(EAX!=I2) then  		//making sure not to sort if already sorted
+	mov(I2,ECX);
+	mov(A2[ECX*4],Tmp);
+	mov(A2[EAX*4],A2[ECX*4]);
+	mov(Tmp, A2[EAX*4]);
+endif;
+	sub(1,I2);
+
+for (MOV (0, EBX); EBX < num; INC (EBX)) do
+// Print array
+	stdout.puti32Size (A2 [EBX * 4], 4, ' ');
+endfor;
+stdout.put (" ", nl);
+endwhile;
+
+stdout.put (nl, "Michael Helfand - Project 4", nl, nl);
+
+end SLCsort;
